@@ -1,0 +1,32 @@
+* TODO
+[x] til - turing complete
+[ ] @begin
+[ ] macros
+[ ] @replace
+[ ] @hygenic
+[ ] @quote & @unquote?
+[ ] namespaces
+[ ] importing & unimporting
+[ ] macrolib
+[ ] optimization
+[ ] reader macros
+
+* GOALS
+[x] lexer & parser
+[x] basic codegen
+[x] til emulator
+[ ] fibbonacci
+[ ] langton's ant
+[ ] rule 110
+[ ] complex macros
+[ ] reader macros - redefine the syntax or add syntactic sugar
+
+* TIL EMULATOR TODO
+[x] halt: HLT
+[x] branching: BRZ, BNZ, BRN, BRP, BRL, BRG, BRE, BNE, BLE, BGE, BRC, BNC
+[ ] indirect branching: STACK- everything above
+[ ] calling and returning: CAL, RET
+[ ] shifting & barrel shifting: BSR, BSL, RSH, LSH
+[x] bitwise operations: XOR, AND, OR, NOT
+[ ] ports: INP OUT
+[ ] stack operations: DUP, ROT

@@ -1,0 +1,78 @@
+;| BUILT-IN FEATURES |;
+
+; macro:
+; notes:
+; - not inherently hygenic
+; - remember to make it so that macro doesn't replace itself in the definition (lol)
+
+; compile time macro features:
+; - for ($)
+; - car & cdr
+; - replace
+
+; syntax:
+; (@macro keyword (pattern result) ...)
+; note: pattern has to contain keyword (give error if it doesn't)
+
+; macro example:
+(@macro @rule
+    [(@rule pattern result) (@macro
+        [pattern result]
+    )]
+)
+
+
+
+; inline:
+; notes:
+; - inlines in TIL
+; - isn't affected by macros
+; - hygenic labels?
+
+; syntax:
+; (@inline instruction ...)
+
+; inline example:
+(@inline ; could disable macros inside inline blocks
+    (label start)
+    (lod 5700)
+    (goto start)
+    (beq 2 2 start)
+    (inline @BITS 32) ; double inlining
+)
+
+
+
+; hygenic:
+; notes:
+; - renames identifiers to whatever the compiler wants
+; - shouldn't be identified by macros?
+
+; syntax:
+; (@hygenic var expr ...)
+
+; hygenic example:
+(@hygenic x ; replaces all x instances in the scope to some hygenically generated name
+    (let ([x 10]) (loop ; dum loop
+        (set x (- x 1))
+
+        (if (<= x 0) (break))
+    ))
+)
+
+
+
+; begin:
+; notes:
+; - could maybe probably find a way to turn it into a macro
+; - can be turned into begin0?
+
+; syntax:
+; (@begin expr ... final)
+
+; begin example:
+(@begin 
+    (define x 3)
+    (define y 5)
+    (+ x y) ; only returns this value
+) ; x and y do get defined, but they dont get returned from the begin expression

@@ -1,0 +1,33 @@
+; (define v)
+; (set v 3)
+; (set v (+ v 7))
+
+; (@def-var v)
+; (@psh 3)
+; (@set v)
+; (@psh 7)
+; (@get v)
+; (@add)
+; (@set v)
+
+(@push 0)
+(@store 0)
+(@load 0)
+(@print-int)
+
+(@push 1)
+(@store 1)
+(@load 1)
+(@print-int)
+
+; loop
+(@label loop)
+
+; loop contents
+
+(@bnc loop)
+
+
+; (@def-var a)
+; (@def-var b)
+; (@set a)

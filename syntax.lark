@@ -1,0 +1,19 @@
+start: expr+
+
+expr: ("(" | "[") expr* (")" | "]") -> expr
+    | IDENTIFIER                    -> atom
+
+IDENTIFIER: STARTCHAR [CHAR*]
+          | INT
+          
+STARTCHAR: SYMBOL | LETTER
+CHAR: SYMBOL | LETTER | INT
+SYMBOL: "+"|"-"|"/"|"*"|"%"|"&"|"~"|"$"|"#"|"@"|"|"|"!"|"?"|","|"."|"="|"<"|">"|"'"
+
+%import common.LETTER
+%import common.INT
+%import common.WS
+%ignore WS
+
+COMMENT: /;[^\n]*/
+%ignore COMMENT

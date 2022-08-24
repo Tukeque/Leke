@@ -1,0 +1,88 @@
+// header:
+@BITS 32
+@RUN ROM // or RAM
+@MINHEAP 300 // allocatable memory
+@MINSTACK 100 // stack size
+@VERSION 0.1.0 // to check for compatibility
+
+/*
+this is a (cool) multiline comment
+*/
+
+// all supported instructions:
+.start // label
+STORE 300
+LOAD 300
+STACK-STORE
+STACK-LOAD
+PUSH 1337
+POP
+
+ADD 3
+SUB 3
+MLT 3
+DIV 3
+MOD 3
+STACK-ADD
+STACK-SUB
+STACK-MLT
+STACK-DIV
+STACK-MOD
+
+HALT // make return an error code?
+
+BRZ .start
+BNZ .start
+BRN .start
+BRP .start
+BRL .start
+BRG .start
+BRE .start
+BNE .start
+BLE .start
+BGE .start
+BRC .start
+BNC .start
+JMP .start
+STACK-BRZ
+STACK-BNZ
+STACK-BRN
+STACK-BRP
+STACK-BRL
+STACK-BRG
+STACK-BRE
+STACK-BNE
+STACK-BLE
+STACK-BGE
+STACK-BRC
+STACK-BNC
+STACK-JMP
+
+CALL .start
+STACK-CALL
+RET
+
+BSR 2
+BSL 2
+STACK-BSR
+STACK-BSL
+RSH
+LSH
+
+XOR 0xFF
+AND 0b1111
+OR  0xFF
+NOT
+STACK-XOR
+STACK-AND
+STACK-OR
+
+IN %TEXT // they're internally just macros, same as labels
+OUT %TEXT
+STACK-IN
+STACK-OUT
+
+// not final or debug
+PRINT-INT
+PRINT-STR
+DEF-VAR

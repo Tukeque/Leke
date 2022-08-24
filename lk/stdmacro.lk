@@ -1,0 +1,85 @@
+(@macro @rule
+    [(@rule keyword pattern result) (@macro keyword
+        [pattern result]
+    )]
+)
+
+; operators (overwriteable?)
+(@rule (+ a b) (@inline (get a) (get b) (add)))
+(@rule (- a b) (@inline (get a) (get b) (sub)))
+(@rule (* a b) (@inline (get a) (get b) (mlt)))
+(@rule (/ a b) (@inline (get a) (get b) (div)))
+(@rule (% a b) (@inline (get a) (get b) (mod)))
+
+; functions
+(@rule function (function name args body) (
+    (@begin
+        (@inline
+            (goto end)
+            (label name)
+            ; calling convention goes here
+        )
+        (body)
+        (@inline
+            (label end)
+        )
+        (@rule name
+            @inline (
+                (goto name)
+            )
+        )
+        (0)
+    )
+))
+
+(@rule lambda (lambda args body) (
+    (@begin
+        (@inline
+            (goto end)
+            (label lambda)
+            ; calling convention goes here
+        )
+        (body)
+        (@inline
+            (label end)
+        )
+        (@get-label lambda) ; built-in?
+    )
+))
+; note: all expressions call unless specified not to by built-in functions
+
+; memory management
+(function @malloc (size) (
+    ; malloc
+))
+
+(function @free (ptr) (
+    ; free
+))
+
+; variable declaration and setting
+(@macro define
+    [(define var) (
+        (@begin
+            (@rule var (var) (
+                ,(@malloc 1)
+            ))
+            '(var)
+        )
+    )]
+)
+
+(@rule set (set var expr) (@begin
+    (@psh-expr expr)
+    (@load var) ; loads into address of var
+))
+
+(@macro define
+    [(define var expr) (
+        (@begin
+            (define var)
+            (set var expr)
+            '(var)
+        )
+    )]
+)
